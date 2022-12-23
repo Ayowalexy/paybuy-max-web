@@ -1,0 +1,72 @@
+.dashboardContainer {
+  width: 91%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 3.1fr 1fr;
+}
+.firstContainer {
+  width: 100%;
+  position: relative;
+}
+.img1 {
+  background: url("/images/bvn.svg");
+  width: 80%;
+  margin: 0 auto;
+  height: 87px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.img2 {
+  position: absolute;
+  top: -3.5%;
+  left: 14%;
+  z-index: 2;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.img1 .bvnText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 3rem;
+}
+.bvnText h6 {
+  font-family: "Gotham";
+  color: #0b0101;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.035em;
+}
+.bvnText p {
+  color: #000000;
+  font-family: "Gotham";
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.img1 button {
+  margin-left: 7rem;
+  font-family: "Gotham";
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: -0.2px;
+  color: #ffffff;
+  background: #f24405;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  width: 9.5rem;
+  height: 2.2rem;
+}
+.cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2.2rem;
+  row-gap: 2.2rem;
+  margin: 1rem 0;
+}

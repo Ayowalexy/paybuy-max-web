@@ -1,0 +1,56 @@
+.card {
+  width: 100%;
+  height: 9.5rem;
+  background: #ffffff;
+  border-radius: 18px;
+}
+.coinText {
+  display: flex;
+  align-items: center;
+  margin: 0.7rem 0;
+}
+.cardText {
+  width: 88%;
+  margin: 1rem auto;
+  display: flex;
+  font-family: "Gotham";
+}
+.cardtexts img {
+  width: 2rem;
+  height: 2rem;
+}
+.cardtexts {
+  width: 50%;
+}
+.coinText p {
+  font-family: "Gotham";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 10px;
+  letter-spacing: 0.016em;
+  color: #333333;
+}
+.arrow {
+  font-size: 0.75rem;
+  margin: 0 0.4rem;
+}
+.cardtexts h4 {
+  font-size: 1.1rem;
+  font-family: "Gotham";
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 23px;
+  letter-spacing: 0.016em;
+}
+.cardGraph{
+    width: 40%;
+    height: 5rem;
+    margin-top: 1.2rem;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+.dip{
+  font-size: .8rem;
+  font-family: "Gotham";
+  margin-top: .5rem;
+  color: #F23985;
+}
