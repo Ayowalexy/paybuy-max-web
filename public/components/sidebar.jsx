@@ -23,7 +23,7 @@ const Sidebar = () => {
       <div className= {styles.navList}>
       <List spacing={7} style={{width: "100%", display: "flex", flexDirection: "column", alignItems:"center", justifyContent: "center"}}>
         {navigation.map((link, idx) => (
-          <div key={idx} style={{width: "95%", marginLeft: "5%"}} onClick={() =>  {
+          <div key={idx} style={{width: "90%", marginLeft: "10%"}} onClick={() =>  {
             setActive(link.name)
             router.push(link.route)
           }}>

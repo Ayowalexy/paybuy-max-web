@@ -1,0 +1,40 @@
+.para {
+  font-family: "Gotham";
+  font-weight: 400;
+  font-size: 10.5px;
+  line-height: 10px;
+  text-align: center;
+  letter-spacing: 0.25px;
+  color: #2a2b31;
+}
+.arrow {
+  color: #ff0000;
+  margin-right: 0.15rem;
+}
+.btc {
+  font-family: "Gotham";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 11px;
+  text-align: right;
+  letter-spacing: 0.3px;
+  color: #a7a4a8;
+}
+.transactionInfo {
+  margin-top: 3rem;
+}
+.code {
+  font-family: "Gotham";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 10px;
+  letter-spacing: 0.3px;
+  color: #42434b;
+  margin-top: 1rem;
+  text-align: center;
+}
+.transactionInfo button {
+  
+}

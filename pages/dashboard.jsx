@@ -1,12 +1,14 @@
-import Layout from "./layout.pages";
+import Layout from "../public/components/layout.pages";
 import style from "../styles/dashboard.module.css";
 import Data from "../public/data";
 import Cards from "../public/components/cards";
-
+import MarketOverview from "../public/components/market-overview";
+import Balance from "../public/components/balance";
+import RecentTable from "../public/components/table";
 const Dashboard = () => {
   return (
     <Layout>
-      <div className={style.dashboardContainer}>
+      <div className={style.dashboardcontainer}>
         <div className={style.firstContainer}>
           <div className={style.img1}>
             <div className={style.bvnText}>
@@ -18,11 +20,15 @@ const Dashboard = () => {
           <img src="/images/warning.svg" className={style.img2} />
           <div className={style.cards}>
             {Data.map((elem) => (
-              <Cards elem={elem}/>
+              <Cards elem={elem} />
             ))}
           </div>
+          <MarketOverview />
+          <RecentTable/>
         </div>
-        <div className={style.secContainer}></div>
+        <div className={style.secContainer}>
+        <Balance/>
+        </div>
       </div>
     </Layout>
   );

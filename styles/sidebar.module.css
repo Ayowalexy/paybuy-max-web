@@ -1,7 +1,9 @@
 .sidebar {
-  width: 19%;
+  width: 17%;
   height: 100vh;
   background: #f24405;
+  position: fixed;
+  z-index: 2;
 }
 .logo {
   background-color: #fff;

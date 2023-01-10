@@ -1,6 +1,6 @@
-import styles from "../styles/layout.styles.module.css";
-import Sidebar from "../public/components/sidebar";
-import Header from "../public/components/header";
+import styles from "../../styles/layout.styles.module.css";
+import Sidebar from "./sidebar";
+import Header from "./header";
 const Layout = ({ children }) => {
   return (
     <div className={styles.LayoutContainer}>

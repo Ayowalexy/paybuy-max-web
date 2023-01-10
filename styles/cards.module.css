@@ -1,6 +1,6 @@
 .card {
   width: 100%;
-  height: 9.5rem;
+  height: 8.7rem;
   background: #ffffff;
   border-radius: 18px;
 }
@@ -41,6 +41,8 @@
   font-size: 22px;
   line-height: 23px;
   letter-spacing: 0.016em;
+  color: #00261C;
+  letter-spacing: 0.016em;
 }
 .cardGraph{
     width: 40%;
@@ -53,4 +55,6 @@
   font-family: "Gotham";
   margin-top: .5rem;
   color: #F23985;
+  letter-spacing: -0.02em;
+  font-weight: 500;
 }
