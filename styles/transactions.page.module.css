@@ -1,0 +1,70 @@
+.transactionpage {
+  width: 95%;
+  margin: 0.6rem auto 0 auto;
+  height: 100vh;
+}
+.firstline {
+  margin-top: 2rem;
+  position: relative;
+  width: 100%;
+}
+.first {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  left: 1%;
+  top: 0;
+}
+.first h4 {
+  font-size: 2rem;
+  font-family: "Gotham";
+  font-weight: 400;
+}
+.first p {
+  font-size: 0.7rem;
+  margin-top: 0.9rem;
+  color: #b3b0b3;
+  font-family: "Gotham";
+  margin-left: 0.3rem;
+}
+.first button {
+  margin-left: 1.4rem;
+  padding: 0.5rem 1rem;
+  background: #f24005;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.85rem;
+}
+.tabhead {
+  position: absolute;
+  right: 0;
+}
+.table1 {
+  margin-top: 4rem;
+  width: 100%;
+}
+.typeimg {
+  width: 1.3rem;
+  height: 1.3rem;
+  object-fit: contain;
+  object-position: center;
+}
+.menudots {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.arrow {
+  font-size: 0.8rem;
+  color: #cac9ca;
+}
+.arrowtext {
+    margin-left: .5rem;
+}
+.statusmark{
+    font-size: 1.1rem;
+    font-weight: 700;
+}

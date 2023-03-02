@@ -43,7 +43,7 @@ const Basic = () => (
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.email}
-            placeholder="(min. N 1000)"
+        
           />
           </div>
           {errors.email && touched.email && errors.email}

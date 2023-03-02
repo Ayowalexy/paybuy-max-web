@@ -100,6 +100,12 @@
   letter-spacing: 0.3px;
   color: #606166;
 }
+.contentSpan{
+  margin-left: .5rem;
+}
+.contentSpan2{
+  margin-left: .5rem;
+}
 .contentSpan2 h2 {
   font-family: "Gotham";
   font-weight: 400;
@@ -223,4 +229,30 @@
   line-height: 11px;
   text-align: center;
   letter-spacing: 0.4125px;
+}
+.topForm{
+  width: 100%;
+  margin: 0 auto;
+}
+.topForm span{
+  display: flex;
+  flex-direction: column;
+  margin-top: .4rem;
+}
+.topForm input{
+  width: 100%;
+  height: 2rem;
+  background: #faf3f1;
+  border: none;
+  outline: none;
+  padding-left: .5rem;
+}
+.confirmBtn{
+  margin-top: 1rem;
+  width: 100%;
+  height: 2.2rem;
+  background: #f24405;
+  font-size: .9rem;
+  color: #ffffff;
+  border-radius: 1.2rem;
 }

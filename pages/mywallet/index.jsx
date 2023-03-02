@@ -19,12 +19,14 @@ const MyWallet = () => {
             <div className={style.picText}>
               <p>Account in Naira</p>
               <p>Available funds</p>
-              <span style={{ display: "flex", alignItems: "center" }}>
+              <span style={{ display: "flex", alignItems: "center", cursor: "pointer"}}
+              onClick={() => router.push("/deposit")}
+              >
                 <AiFillPlusCircle
                   className={style.icons}
                   style={{ zIndex: "2", position: "relative" }}
                 />
-                <p>Add Funds</p>
+                <p style={{marginLeft: "-.1rem"}}>Add Funds</p>
               </span>
             </div>
             <div className={style.amount}>
@@ -42,6 +44,7 @@ const MyWallet = () => {
               <button
                 className={style.btn1}
                 style={{ background: "#000", color: "#ffffff" }}
+                onClick={() => router.push("/withdraw")}
               >
                 Withdraw
               </button>

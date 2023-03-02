@@ -53,7 +53,7 @@ const AreaGraph = () => {
      <AreaChart
        data={data}
        margin={{
-         top: 10,
+         top: 50,
          right: 30,
          left: 30,
          bottom: 0,
