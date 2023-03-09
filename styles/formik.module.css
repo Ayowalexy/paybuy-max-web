@@ -1,7 +1,8 @@
 .formikContainer {
   width: 63%;
-  height: auto;
-  margin: 3rem auto;
+  height: 12rem;
+  margin: 0 auto;
+  padding-bottom: 2rem;
 }
 .formikContainer h1 {
   text-align: center;
@@ -9,8 +10,9 @@
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
-  line-height: 36px;
+  line-height: 20px;
   color: #020246;
+  margin-top: 3rem;
 }
 .formikContainer input {
   height: 2.3rem;
@@ -33,5 +35,21 @@
 .inputfield {
   display: flex;
   flex-direction: column;
-  margin-top: 1.3rem;
+  margin-top: 1.1rem;
+}
+.error{
+  color: red;
+  font-size: .7rem;
+  margin-top: .2rem;
+  font-family: "Gotham";
+}
+.basicbtn{
+  text-align: center;
+  width: 100%;
+  height: 2.5rem;
+  background-color: #f24005;
+  color: #ffffff;
+  font-family: "Gotham";
+  font-size: .85rem;
+  margin-top: 1rem;
 }
