@@ -2,7 +2,9 @@ import style from "../../styles/header.module.css";
 import { useTheme } from "@chakra-ui/react";
 import { TfiBell } from "react-icons/tfi";
 import { TiArrowSortedDown } from "react-icons/ti";
+import { useSelector } from "react-redux";
 const Header = () => {
+  const {details} = useSelector(state => state.authReducers)
   const theme = useTheme();
   const { orange } = theme.colors.brand;
   return (
@@ -19,7 +21,7 @@ const Header = () => {
         </div>
         <div className={style.userName}>
           <img src="/images/user.svg" />
-          <h6>James Smith</h6>
+          <h6>{details?.firstname}{details?.lastname}</h6>
           <TiArrowSortedDown style={{ color: orange }} />
         </div>
       </div>

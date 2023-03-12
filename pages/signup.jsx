@@ -7,11 +7,18 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import {AiFillEye} from "react-icons/ai"
 import { useState } from "react";
+import { setData, setProducts, setDetails } from "../public/redux/auth";
+
+
 const SignUp = () => {
   const [shows, setShows] = useState(false);
   const dispatch = useDispatch();
-  const state = useSelector(state => state.authReducer)
-  console.log(state)
+  const {data, products, details} = useSelector(state => state.authReducers)
+  console.log(data)
+  console.log(products)
+  let detail = {
+    email: 'seinde4'
+  }
   const validationSchema = Yup.object().shape({
     email: Yup.string().email().required("email is required"),
     password: Yup.string().required("password is required"),
@@ -42,7 +49,7 @@ const SignUp = () => {
             style={{ color: "#fff", fontWeight: "600", fontFamily: "Gotham" }}
             fontSize={{ lg: "1.5rem" }}
           >
-            Welcome to Paybuymax
+            Welcome to Paybuymax {details?.email}
           </Text>
           <Text
             fontSize={{ lg: ".8rem" }}
@@ -138,7 +145,10 @@ const SignUp = () => {
                 type="password"
               />
             </span>
-            <div className={style.submit} onClick={handleSubmit}>
+            <div className={style.submit} onClick={() => {
+
+              dispatch(setDetails(detail))
+            }}>
               Sign Up
             </div>
             <div

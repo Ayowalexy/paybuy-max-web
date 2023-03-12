@@ -5,7 +5,9 @@ import Cards from "../public/components/cards";
 import MarketOverview from "../public/components/market-overview";
 import Balance from "../public/components/balance";
 import RecentTable from "../public/components/table";
+import { useSelector } from "react-redux";
 const Dashboard = () => {
+  const {coins} = useSelector(state => state.coinReducer)
   return (
     <Layout>
       <div className={style.dashboardcontainer}>
@@ -19,7 +21,7 @@ const Dashboard = () => {
           </div>
           <img src="/images/warning.svg" className={style.img2} />
           <div className={style.cards}>
-            {Data.map((elem) => (
+            {coins.map((elem) => (
               <Cards elem={elem} />
             ))}
           </div>

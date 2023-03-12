@@ -4,7 +4,16 @@ import { BsEnvelopeOpen } from "react-icons/bs";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { setDetails } from "../public/redux/auth";
+import { setCoins } from "../public/redux/coins";
+import Data from "../public/data";
+
+
 const SignIn = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().email().required("email is required"),
     password: Yup.string().required("password is required"),
@@ -26,9 +35,16 @@ const SignIn = () => {
       email: "",
     },
     validationSchema,
-    onSubmit: (values) => {},
+    onSubmit: (values) => {
+      const user = {
+        firstname: "emmanuel",
+        lastname: "Senderouszz"
+      }
+      dispatch(setCoins(Data))
+      dispatch(setDetails(user))
+      router.push("/dashboard")
+    },
   });
-  const router = useRouter();
   return (
     <div className={style.signupContainer}>
       <div className={style.image}>
