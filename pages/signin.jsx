@@ -8,11 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setDetails } from "../public/redux/auth";
 import { setCoins } from "../public/redux/coins";
 import Data from "../public/data";
-
+import { loginUser, userProfile } from "../public/redux/auth/thunk-action";
+import { Spinner } from "../public/components/spinner";
 
 const SignIn = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const {loading} = useSelector(state=> state.authReducers)
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email().required("email is required"),
@@ -35,14 +37,20 @@ const SignIn = () => {
       email: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      const user = {
-        firstname: "emmanuel",
-        lastname: "Senderouszz"
-      }
-      dispatch(setCoins(Data))
-      dispatch(setDetails(user))
-      router.push("/dashboard")
+    onSubmit: async (values) => {
+      // const user = {
+      //   firstname: "emmanuel",
+      //   lastname: "Senderouszz"
+      // }
+      await dispatch(loginUser(values)).then(res => {
+        if (res.meta.requestStatus === 'fulfilled') {
+          dispatch(userProfile())
+          router.push('/dashboard')
+        }
+      })
+      // dispatch(setCoins(Data))
+      // dispatch(setDetails(user))
+      // router.push("/dashboard")
     },
   });
   return (
@@ -130,29 +138,9 @@ const SignIn = () => {
                 </Text>
               )}
             </span>
-            <span>
-              <label
-                style={{
-                  fontWeight: "300",
-                  color: "#676767",
-                  display: "flex",
-                  marginLeft: ".3rem",
-                }}
-              >
-                <Text style={{ fontWeight: "600", color: "#000" }}>
-                  Referral Code
-                </Text>{" "}
-                (Optional)
-              </label>
-              <input
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="password"
-                type="password"
-              />
-            </span>
             <div className={style.submit} onClick={handleSubmit}>
-              Sign In
+               {/* Sign Up */}
+               {loading === "pending" ? <Spinner /> : "Sign in"}
             </div>
             <div
               style={{

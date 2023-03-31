@@ -1,7 +1,41 @@
 import { Text } from "@chakra-ui/react";
 import style from "../../styles/quick.module.css";
+import { useFlutterwave, closePaymentModal,FlutterWaveButton } from 'flutterwave-react-v3';
+import { useState , useEffect} from "react";
+import { useSelector } from "react-redux";
 
 const QuickTransfer = () => {
+  const { user } = useSelector(state => state.authReducers);
+  const [amount, setAmount] = useState("")
+  const config = {
+    public_key: 'FLWPUBK_TEST-99c33a4a6db6124913dd2b289e95f79d-X',
+    tx_ref: Date.now(),
+    amount: 1000,
+    currency: 'NGN',
+    payment_options: 'card,mobilemoney,ussd',
+    customer: {
+      email: 'seinde4@gmail.com',
+      phonenumber: '08145405006',
+      name: 'john doe',
+    },
+    customizations: {
+      title: 'My store',
+      description: 'Payment for items in cart',
+      logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
+    },
+  };
+
+  const fwConfig = {
+    ...config,
+    text: 'Pay with Flutterwave!',
+    callback: (response) => {
+       console.log(response);
+      closePaymentModal() // this will close the modal programmatically
+    },
+    onClose: () => {},
+  };
+
+
   return (
     <div>
       <form
@@ -26,9 +60,12 @@ const QuickTransfer = () => {
           >
             Amount
           </Text>
-          <input type="name" placeholder="(min. N 1000)" />
+          <input value={amount} onChange={(e) => setAmount(e.target.value)} type="name" placeholder="(min. N 1000)" />
         </span>
-        <button className={style.quickBtn}>
+        <button className={style.quickBtn}
+          
+          >
+            <FlutterWaveButton {...fwConfig} />
           <Text
             fontSize={{ lg: "1rem" }}
             style={{
@@ -40,6 +77,8 @@ const QuickTransfer = () => {
             Top up
           </Text>
         </button>
+        <FlutterWaveButton {...fwConfig} />
+
       </form>
       <hr
         style={{

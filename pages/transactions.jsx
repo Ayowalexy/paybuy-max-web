@@ -18,10 +18,21 @@ import {
 //  import CustomizedTables from "../public/components/mui-table";
 import TableData from "../public/table-data";
 import { padding } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
+import { userTransaction } from "../public/redux/transaction/thunk-action";
+import { useEffect } from "react";
+
 
 const Transactions = () => {
+  const dispatch = useDispatch();
+  const {loading, transactions} = useSelector(state => state.transactionReducers)
   const theme = useTheme();
   const { secondary } = theme.colors;
+
+  useEffect(() => {
+    dispatch(userTransaction())
+  }, [])
+  console.log(transactions)
   return (
     <Layout>
       <div className={style.transactionpage}>
@@ -80,7 +91,7 @@ const Transactions = () => {
         </div>
         <div className={style.firstline}>
           <div className={style.first}>
-            <h4>1,234</h4>
+            <h4>{transactions.length}</h4>
             <p>Transactions</p>
             <button>Export History</button>
           </div>
@@ -159,11 +170,6 @@ const Transactions = () => {
                           </Th>
                           <Th style={{ fontFamily: "Gotham" }}>
                             <Text fontSize={{ lg: ".65rem" }}>
-                              Transaction ID
-                            </Text>
-                          </Th>
-                          <Th style={{ fontFamily: "Gotham" }}>
-                            <Text fontSize={{ lg: ".65rem" }}>
                               Coin Quantity{" "}
                             </Text>
                           </Th>
@@ -173,17 +179,18 @@ const Transactions = () => {
                         </Tr>
                       </Thead>
                       <Tbody style={{}}>
-                        {TableData.map(
+                        {transactions?.map(
                           ({
                             menu,
                             transactionArrow,
-                            transactionId,
-                            transactionType,
+                            address,
+                            bankaccount,
+                            type,
                             status,
                             statusMark,
-                            date,
-                            coin,
-                            Quantity,
+                            created_at,
+                            currency,
+                            amount,
                             color,
                           }) => (
                             <Tr
@@ -208,41 +215,20 @@ const Transactions = () => {
                                   <span style={{ marginLeft: ".5rem" }}>
                                     {" "}
                                     <Text fontSize={{ lg: ".8rem" }}>
-                                      {date}
+                                      {new Date(created_at).toLocaleDateString()}
                                     </Text>
                                   </span>
                                 </div>
                               </td>
                               <td
                                 style={{
-                                  paddingLeft: "6.5%",
+                                  paddingLeft: "2rem",
                                   fontFamily: "Gotham",
                                 }}
                               >
-                                <img
-                                  src={transactionType}
-                                  className={style.typeimg}
-                                />
-                              </td>
-                              <td>
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    paddingLeft: "1%",
-                                    fontFamily: "Gotham",
-                                    margin: "auto",
-                                  }}
-                                >
-                                  <span className={style.arrow}>
-                                    {transactionArrow}
-                                  </span>
-                                  <span className={style.arrowtext}>
-                                    <Text fontSize={{ lg: ".8rem" }}>
-                                      {transactionId}
+                               <Text fontSize={{ lg: ".8rem" }}>
+                                      {type}
                                     </Text>
-                                  </span>
-                                </div>
                               </td>
                               <td>
                                 <div
@@ -256,12 +242,12 @@ const Transactions = () => {
                                 >
                                   <span>
                                     <Text fontSize={{ lg: "1.02rem" }} fontWeight={{lg: "500"}}>
-                                      {Quantity}
+                                      {amount}
                                     </Text>
                                   </span>
                                   <span style={{marginLeft: ".2rem"}}>
                                     <Text fontSize={{ lg: "1rem" }}>
-                                      {coin}
+                                      {currency}
                                     </Text>
                                   </span>
                                 </div>
@@ -294,14 +280,272 @@ const Transactions = () => {
                   </TableContainer>
                 </TabPanel>
                 <TabPanel>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
-                  <p>two!</p>
+                <TableContainer className="table1">
+                    <Table
+                      variant="striped"
+                      colorScheme="secondary"
+                      style={{
+                        borderCollapse: "separate",
+                        borderSpacing: "0px 14px",
+                      }}
+                    >
+                      <Thead style={{ background: "white" }}>
+                        <Tr style={{ fontFamily: "Gotham" }}>
+                          <Th style={{ fontFamily: "Gotham" }}>
+                            <Text fontSize={{ lg: ".65rem" }}>Date / Time</Text>
+                          </Th>
+                          <Th style={{ fontFamily: "Gotham" }}>
+                            <Text fontSize={{ lg: ".65rem" }}>
+                              Transaction Type
+                            </Text>
+                          </Th>
+                          <Th style={{ fontFamily: "Gotham" }}>
+                            <Text fontSize={{ lg: ".65rem" }}>
+                              Coin Quantity{" "}
+                            </Text>
+                          </Th>
+                          <Th style={{ fontFamily: "Gotham" }}>
+                            <Text fontSize={{ lg: ".65rem" }}> Status</Text>
+                          </Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody style={{}}>
+                        {transactions
+                        ?.filter((elem)=> elem.type === "Transfer"
+                        )
+                        ?.map(
+                          ({
+                            menu,
+                            transactionArrow,
+                            address,
+                            bankaccount,
+                            type,
+                            status,
+                            statusMark,
+                            created_at,
+                            currency,
+                            amount,
+                            color,
+                          }) => (
+                            <Tr
+                              style={{
+                                background: "white",
+                                width: "90%",
+                                height: "3.3rem",
+                                textAlign: "center",
+                              }}
+                            >
+                              <td>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    paddingLeft: "10%",
+                                    fontFamily: "Gotham",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <span className={style.menudots}>{menu}</span>
+                                  <span style={{ marginLeft: ".5rem" }}>
+                                    {" "}
+                                    <Text fontSize={{ lg: ".8rem" }}>
+                                      {new Date(created_at).toLocaleDateString()}
+                                    </Text>
+                                  </span>
+                                </div>
+                              </td>
+                              <td
+                                style={{
+                                  paddingLeft: "2rem",
+                                  fontFamily: "Gotham",
+                                }}
+                              >
+                               <Text fontSize={{ lg: ".8rem" }}>
+                                      {type}
+                                    </Text>
+                              </td>
+                              <td>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    paddingLeft: "14%",
+                                    fontFamily: "Gotham",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <span>
+                                    <Text fontSize={{ lg: "1.02rem" }} fontWeight={{lg: "500"}}>
+                                      {amount}
+                                    </Text>
+                                  </span>
+                                  <span style={{marginLeft: ".2rem"}}>
+                                    <Text fontSize={{ lg: "1rem" }}>
+                                      {currency}
+                                    </Text>
+                                  </span>
+                                </div>
+                              </td>
+                              <td>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    fontFamily: "Gotham",
+                                    background: "#FAF3F1",
+                                    width: "90%",
+                                    height: "2rem",
+                                    padding: "0 10%"
+                                  }}
+                                >
+                                  <span>
+                                    <Text fontSize={{ lg: ".7rem" }}>
+                                      {status}
+                                    </Text>
+                                  </span>
+                                  <span className={style.statusmark} style={{ color, marginLeft: ".3rem" }}>{statusMark}</span>
+                                </div>
+                              </td>
+                            </Tr>
+                          )
+                        )}
+                      </Tbody>
+                    </Table>
+                  </TableContainer>
                 </TabPanel>
                 <TabPanel>
-                  <p>two!</p>
+                <TableContainer className="table1">
+                    <Table
+                      variant="striped"
+                      colorScheme="secondary"
+                      style={{
+                        borderCollapse: "separate",
+                        borderSpacing: "0px 14px",
+                      }}
+                    >
+                      <Thead style={{ background: "white" }}>
+                        <Tr style={{ fontFamily: "Gotham" }}>
+                          <Th style={{ fontFamily: "Gotham" }}>
+                            <Text fontSize={{ lg: ".65rem" }}>Date / Time</Text>
+                          </Th>
+                          <Th style={{ fontFamily: "Gotham" }}>
+                            <Text fontSize={{ lg: ".65rem" }}>
+                              Transaction Type
+                            </Text>
+                          </Th>
+                          <Th style={{ fontFamily: "Gotham" }}>
+                            <Text fontSize={{ lg: ".65rem" }}>
+                              Coin Quantity{" "}
+                            </Text>
+                          </Th>
+                          <Th style={{ fontFamily: "Gotham" }}>
+                            <Text fontSize={{ lg: ".65rem" }}> Status</Text>
+                          </Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody style={{}}>
+                        {transactions
+                        ?.filter((elem)=> elem.type === "Deposit"
+                        )
+                        ?.map(
+                          ({
+                            menu,
+                            transactionArrow,
+                            address,
+                            bankaccount,
+                            type,
+                            status,
+                            statusMark,
+                            created_at,
+                            currency,
+                            amount,
+                            color,
+                          }) => (
+                            <Tr
+                              style={{
+                                background: "white",
+                                width: "90%",
+                                height: "3.3rem",
+                                textAlign: "center",
+                              }}
+                            >
+                              <td>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    paddingLeft: "10%",
+                                    fontFamily: "Gotham",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <span className={style.menudots}>{menu}</span>
+                                  <span style={{ marginLeft: ".5rem" }}>
+                                    {" "}
+                                    <Text fontSize={{ lg: ".8rem" }}>
+                                      {new Date(created_at).toLocaleDateString()}
+                                    </Text>
+                                  </span>
+                                </div>
+                              </td>
+                              <td
+                                style={{
+                                  paddingLeft: "2rem",
+                                  fontFamily: "Gotham",
+                                }}
+                              >
+                               <Text fontSize={{ lg: ".8rem" }}>
+                                      {type}
+                                    </Text>
+                              </td>
+                              <td>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    paddingLeft: "14%",
+                                    fontFamily: "Gotham",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <span>
+                                    <Text fontSize={{ lg: "1.02rem" }} fontWeight={{lg: "500"}}>
+                                      {amount}
+                                    </Text>
+                                  </span>
+                                  <span style={{marginLeft: ".2rem"}}>
+                                    <Text fontSize={{ lg: "1rem" }}>
+                                      {currency}
+                                    </Text>
+                                  </span>
+                                </div>
+                              </td>
+                              <td>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    fontFamily: "Gotham",
+                                    background: "#FAF3F1",
+                                    width: "90%",
+                                    height: "2rem",
+                                    padding: "0 10%"
+                                  }}
+                                >
+                                  <span>
+                                    <Text fontSize={{ lg: ".7rem" }}>
+                                      {status}
+                                    </Text>
+                                  </span>
+                                  <span className={style.statusmark} style={{ color, marginLeft: ".3rem" }}>{statusMark}</span>
+                                </div>
+                              </td>
+                            </Tr>
+                          )
+                        )}
+                      </Tbody>
+                    </Table>
+                  </TableContainer>
                 </TabPanel>
               </TabPanels>
             </Tabs>

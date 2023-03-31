@@ -1,0 +1,19 @@
+.input {
+    margin: auto;
+    height: 80px;
+    border: 1px solid #000000;
+}
+
+.container{
+    margin: auto auto;
+}
+.container input{
+    width: 3rem !important;
+    font-size: 3.4rem;
+    line-height: 6rem;
+    margin-left: 1rem;
+}
+.focus{
+    border: 1px solid #000000;
+    outline: none;
+}

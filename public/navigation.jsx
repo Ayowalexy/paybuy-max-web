@@ -44,7 +44,7 @@ const navigation = [
     },
     {
         name: "Account Settings",
-        route: "/settings",
+        route: "/myaccount",
         icon: FiSettings
     },
 

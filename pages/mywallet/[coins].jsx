@@ -11,10 +11,12 @@ import { MdContentCopy } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 import React from "react";
 //import { useParams } from "react-router-dom";
 import Crypto from "../../public/crypto";
 const CoinPage = () => {
+  const {wallet} = useSelector(state => state.walletReducers)
   const router = useRouter();
   const [singleCoin, setSingleCoin] = useState({});
   useEffect(() => {
@@ -22,8 +24,8 @@ const CoinPage = () => {
     console.log(Coin);
     console.log(router.query.coins);
     if (Coin) {
-      const data = Crypto.find(
-        (element) => element.name.toLowerCase() === Coin
+      const data = wallet.find(
+        (element) => element.currency.name.toLowerCase() === Coin
       );
       setSingleCoin(data);
     }

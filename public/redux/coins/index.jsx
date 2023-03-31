@@ -13,8 +13,15 @@ const coinsSlice = createSlice({
         coins: action.payload,
       };
     },
+    addCoin: (state, action) => {
+      return{
+        ...state,
+        coins: [...state.coins, action.payload]
+      }
+    }
   },
 });
 
 export const coinReducer = coinsSlice.reducer;
-export const { setCoins } = coinsSlice.actions;
+export const { setCoins, addCoin} = coinsSlice.actions;
+

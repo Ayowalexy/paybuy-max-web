@@ -6,10 +6,24 @@ import { Img } from "@chakra-ui/react";
 import {HiPlus} from "react-icons/hi"
 import Crypto from "../../public/crypto";
 import DataBox from "../../public/components/data-box";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { userWallet, newWallet } from "../../public/redux/wallet/thunk-action";
+import ModeBox from "../../public/components/modal";
+
 const MyWallet = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const {loading, wallet} = useSelector(state => state.walletReducers)
+ const [open, setOpen] = useState(false);
+
+
+  useEffect(() => {
+    dispatch(userWallet())
+  }, [])
   return (
     <Layout>
+       <ModeBox  open= {open} setOpen={setOpen} />
       <div className={style.walletContainer}>
         <div className={style.wallets}>
           <div className={style.wallet1}>
@@ -71,14 +85,15 @@ const MyWallet = () => {
           </div>
         </div>
         <div className={style.cardsContainer}>
-          {Crypto.map((elem) => (
+          {wallet?.map((elem) => (
             <DataBox elem={elem} />
           ))}
-          <div style={{border: "2px dashed rgba(42, 43, 49, 0.3)", borderRadius: "2px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
+          <div style={{border: "2px dashed rgba(42, 43, 49, 0.3)", borderRadius: "2px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}} onClick={() => setOpen(true)}>
           <span className={style.iconPlus}><HiPlus /></span>
           <p className={style.para}>Add wallet</p>
           </div>
         </div>
+       
       </div>
     </Layout>
   );

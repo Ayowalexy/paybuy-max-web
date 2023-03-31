@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { getToken } from ".";
+import { getToken } from "./gettoken";
 
 const useAxios = async function apiRequest(request){
     const token = getToken()
@@ -8,6 +8,7 @@ const useAxios = async function apiRequest(request){
         headers: {
             ...request.headers,
             authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
             mode: "cors",
         },
     });

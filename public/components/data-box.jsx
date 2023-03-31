@@ -3,26 +3,26 @@ import GraphData from "./graph-data";
 import style from "../../styles/data-box.module.css";
 import { useRouter } from "next/router";
 const DataBox = ({ elem }) => {
-  const { icon, name, percent, dollar, dip, coin, code, } = elem;
+  const { name, percent, balance, dip, coin, code, currency,address, currency_code} = elem;
   const router = useRouter();
   const {coins} = router.query;
   return (
     <Fragment>
-      <div className={style.dataBoxContainer} onClick = {() => router.push(`/mywallet/${name.toLowerCase()}`)}>
+      <div className={style.dataBoxContainer} onClick = {() => router.push(`/mywallet/${currency.name.toLowerCase()}`)}>
         <p className={style.balance}>Available Balance</p>
         <div className={style.inner}>
           <div
             style={{ display: "flex", flexDirection: "column", width: "50%" }}
           >
             <div style={{ display: "flex", alignItems: "center" }}>
-              <img src={icon} />
-              <p className={style.name}>{name}</p>
+              <img src={`https://app.paybuymax.com/${currency.logo}`} />
+              <p className={style.name}>{currency.name}</p>
             </div>
             <p className={style.percent}>{percent}</p>
           </div>
           <div className={style.dollar}>
             <p>DOLLAR EQUIVALENT</p>
-            <h3>{dollar}</h3>
+            <h3 style={{display: "flex"}}> {currency_code} {balance}</h3>
           </div>
         </div>
         <div className={style.graph}>
@@ -44,7 +44,7 @@ const DataBox = ({ elem }) => {
             <p>{dip} </p>
             <p style={{ marginLeft: ".2rem" }}>{coin}</p>
           </span>
-          <p className={style.copyText}>{code}</p>
+          <p className={style.copyText}>{address}</p>
         </div>
       </div>
     </Fragment>

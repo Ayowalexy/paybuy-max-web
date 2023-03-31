@@ -40,6 +40,11 @@ th{
 .table1{
   margin-top: 4rem;
 }
+.css-52dxnr {
+  /* border-bottom: 2px solid !important;
+    margin-bottom: -2px; */
+    color: #f24405 !important;
+}
 @media (prefers-color-scheme: dark) {
  
 }

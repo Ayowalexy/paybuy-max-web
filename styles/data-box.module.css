@@ -55,7 +55,7 @@
 }
 .dollar {
   background: url("/images/framee.svg");
-  width: 40%;
+  width: 46%;
   height: 4rem;
   background-position: center;
   background-size: cover;
@@ -64,16 +64,18 @@
 .dollar p {
   font-family: "Gotham";
   font-weight: 400;
-  font-size: 6px;
+  font-size: 7px;
   line-height: 6px;
   text-align: center;
   letter-spacing: 0.257143px;
   text-transform: uppercase;
   color: #ffffff;
-  padding-top: 0.4rem;
+  padding-top: 0.5rem;
 }
 .dollar h3 {
-  font-size: 1.2rem;
+  font-size: .85rem;
+  display: flex;
+  justify-content: center;
   color: #ffffff;
   font-weight: 600;
   font-family: "Gotham";

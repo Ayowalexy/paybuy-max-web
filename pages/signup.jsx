@@ -5,23 +5,33 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import {AiFillEye} from "react-icons/ai"
+import { AiFillEye } from "react-icons/ai"
 import { useState } from "react";
 import { setData, setProducts, setDetails } from "../public/redux/auth";
+import { signUpUser } from "../public/redux/auth/thunk-action";
+import { Spinner } from "../public/components/spinner";
+import { useVerify } from "../public/context/verify.context";
 
 
 const SignUp = () => {
+  const { setEmail} = useVerify()
   const [shows, setShows] = useState(false);
   const dispatch = useDispatch();
-  const {data, products, details} = useSelector(state => state.authReducers)
-  console.log(data)
-  console.log(products)
+  // const {data, products, details} = useSelector(state => state.authReducers)
+  const { loading } = useSelector(state => state.authReducers)
+  // console.log(data)
+  // console.log(products)
   let detail = {
     email: 'seinde4'
   }
   const validationSchema = Yup.object().shape({
     email: Yup.string().email().required("email is required"),
-    password: Yup.string().required("password is required"),
+    password: Yup.string()
+      .matches(/\d/, "Password must have a number")
+      .min(8, ({ min }) => `Password must be at least ${min} characters`)
+      .required("Password is required"),
+    name: Yup.string().required("fullname is required"),
+    referer: Yup.string(),
   });
   const {
     handleSubmit,
@@ -33,9 +43,20 @@ const SignUp = () => {
     initialValues: {
       password: "",
       email: "",
+      name: "",
+      referer: ""
     },
     validationSchema,
-    onSubmit: (values) => {},
+    onSubmit: async (values) => {
+      // delete values.name
+      // delete values.referer
+      await dispatch(signUpUser(values)).then(res => {
+        if (res.meta.requestStatus === 'fulfilled') {
+          setEmail(values.email)
+          router.push('/otppage')
+        }
+      })
+    },
   });
   const router = useRouter();
   return (
@@ -49,7 +70,7 @@ const SignUp = () => {
             style={{ color: "#fff", fontWeight: "600", fontFamily: "Gotham" }}
             fontSize={{ lg: "1.5rem" }}
           >
-            Welcome to Paybuymax {details?.email}
+            Welcome to Paybuymax
           </Text>
           <Text
             fontSize={{ lg: ".8rem" }}
@@ -83,6 +104,24 @@ const SignUp = () => {
           </Text>
           <form>
             <span>
+              <label>Fullname</label>
+              <input type="text" name="name" onChange={handleChange} onBlur={handleBlur} placeholder="James Smith" />
+              <BsEnvelopeOpen className={style.envelope} />
+              {!!errors.name && touched.name && (
+                <Text
+                  style={{
+                    color: "red",
+                    fontFamily: "Gotham",
+                    paddingLeft: ".2rem",
+                    paddingTop: ".4rem",
+                  }}
+                  fontSize={{ lg: ".7rem" }}
+                >
+                  {errors.name}
+                </Text>
+              )}
+            </span>
+            <span>
               <label>Email</label>
               <input type="email" name="email" onChange={handleChange} onBlur={handleBlur} placeholder="dummytext@paybuymax.com" />
               <BsEnvelopeOpen className={style.envelope} />
@@ -106,10 +145,10 @@ const SignUp = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="password"
-                type= {shows ? "text" : "password"}
+                type={shows ? "text" : "password"}
                 placeholder="***********"
               />
-              
+
               {!!errors.password && touched.password && (
                 <Text
                   style={{
@@ -141,15 +180,13 @@ const SignUp = () => {
               <input
                 onChange={handleChange}
                 onBlur={handleBlur}
-                name="password"
-                type="password"
+                name="referer"
+                type="referer"
               />
             </span>
-            <div className={style.submit} onClick={() => {
-
-              dispatch(setDetails(detail))
-            }}>
-              Sign Up
+            <div className={style.submit} onClick={handleSubmit}>
+              {/* Sign Up */}
+              {loading === "pending" ? <Spinner /> : "Sign up"}
             </div>
             <div
               style={{
@@ -169,7 +206,7 @@ const SignUp = () => {
                   justifyContent: "center",
                 }}
               >
-                Do you have an account? <Text style={{color: "#f24005", marginLeft: ".3rem"}} onClick={() => router.push("/signin")}>Sign In now</Text>
+                Do you have an account? <Text style={{ color: "#f24005", marginLeft: ".3rem" }} onClick={() => router.push("/signin")}>Sign In now</Text>
               </Text>
             </div>
           </form>

@@ -34,6 +34,7 @@ const Basic = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
+                                        <div className={style.error}>{errors.referral && touched.referral && errors.referral}</div>
             </div>
             <div className={style.error}>{errors.amount && touched.amount && errors.amount}</div>
             <div className={style.inputfield}>
